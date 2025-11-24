@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexGen - Future of Innovation</title>
+    <style>
+      :root {
+        --primary: #667eea;
+        --secondary: #764ba2;
+        --accent: #ffd89b;
+        --bg-glass: rgba(255, 255, 255, 0.08);
+        --border-glass: rgba(255, 255, 255, 0.25);
+        --text-main: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.8);
+        --shadow-soft: 0 20px 45px rgba(0, 0, 0, 0.35);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: radial-gradient(
+          circle at top left,
+          #89f7fe 0%,
+          #667eea 30%,
+          #764ba2 70%,
+          #2b1055 100%
+        );
+        color: var(--text-main);
+        overflow-x: hidden;
+      }
+
+      /* Global Layout */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      section {
+        position: relative;
+      }
+
+      /* Subtle background shapes */
+      .bg-orb {
+        position: fixed;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.18),
+          transparent 65%
+        );
+        filter: blur(1px);
+        opacity: 0.8;
+        z-index: -1;
+      }
+
+      .bg-orb.orb-1 {
+        top: -80px;
+        left: -80px;
+      }
+      .bg-orb.orb-2 {
+        bottom: -120px;
+        right: -120px;
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+          90deg,
+          rgba(10, 10, 35, 0.7),
+          rgba(45, 26, 92, 0.7)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        animation: slideDown 0.8s ease-out;
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      @keyframes slideDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .logo {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: 2.5px;
+        
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .logo-badge {
+        width: 26px;
+        height: 26px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--accent), #ffffff);
+        box-shadow: 0 0 20px rgba(255, 216, 155, 0.7);
+      }
+
+      /* Nav */
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 28px;
+      }
+
+      nav a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--accent);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      nav a:hover {
+        color: #ffffff;
+        transform: translateY(-1px);
+      }
+
+      /* Hamburger (CSS only) */
+      #menu-toggle {
+        display: none;
+      }
+
+      .hamburger {
+        display: none;
+        width: 28px;
+        height: 20px;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+      }
+
+      .hamburger span {
+        display: block;
+        height: 3px;
+        border-radius: 10px;
+        background: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      #menu-toggle:checked + label .line-1 {
+        transform: translateY(8px) rotate(45deg);
+      }
+      #menu-toggle:checked + label .line-2 {
+        opacity: 0;
+      }
+      #menu-toggle:checked + label .line-3 {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      #menu-toggle:checked ~ nav {
+        max-height: 220px;
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 120px 0 80px;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 50px;
+        align-items: center;
+      }
+
+      .hero-tagline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1.8px;
+        margin-bottom: 18px;
+      }
+
+      .hero-tagline span.badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #4cffc3;
+        box-shadow: 0 0 10px rgba(76, 255, 195, 0.8);
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 5vw, 60px);
+        line-height: 1.1;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, #ffffff, var(--accent), #e0d4ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: glow 2.2s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.25));
+        }
+        50% {
+          filter: drop-shadow(0 0 26px rgba(255, 255, 255, 0.55));
+        }
+      }
+
+      .hero p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        max-width: 520px;
+      }
+
+      .hero-cta-group {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 26px;
+        flex-wrap: wrap;
+      }
+
+      .cta-button,
+      .ghost-button {
+        display: inline-block;
+        padding: 14px 32px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 15px;
+        text-decoration: none;
+        transition: all 0.35s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        border: none;
+      }
+
+      .cta-button {
+        background: linear-gradient(135deg, #ffffff, var(--accent));
+        color: var(--secondary);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .ghost-button {
+        background: transparent;
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: none;
+      }
+
+      .ghost-button:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      .hero-meta {
+        font-size: 13px;
+        opacity: 0.85;
+      }
+
+      .hero-meta strong {
+        color: var(--accent);
+      }
+
+      .hero-right {
+        position: relative;
+        justify-self: center;
+      }
+
+      /* New image styling */
+      .hero-illustration {
+        margin-bottom: 18px;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      }
+
+      .hero-illustration img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .hero-card {
+        background: var(--bg-glass);
+        border-radius: 26px;
+        padding: 26px 24px;
+        border: 1px solid var(--border-glass);
+        box-shadow: var(--shadow-soft);
+        max-width: 360px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        width: 160%;
+        height: 160%;
+        background: conic-gradient(
+          from 180deg,
+          rgba(255, 255, 255, 0.1),
+          transparent,
+          rgba(255, 255, 255, 0.08)
+        );
+        top: -30%;
+        left: -30%;
+        opacity: 0;
+        animation: rotateGlow 8s linear infinite;
+      }
+
+      @keyframes rotateGlow {
+        0% {
+          transform: rotate(0deg);
+          opacity: 0.1;
+        }
+        50% {
+          opacity: 0.35;
+        }
+        100% {
+          transform: rotate(360deg);
+          opacity: 0.1;
+        }
+      }
+
+      .hero-card-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-card-title {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+
+      .hero-card-badge {
+        display: inline-block;
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 12px;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 14px;
+      }
+
+      .hero-stat {
+        padding: 8px 10px;
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        text-align: left;
+      }
+
+      .hero-stat h4 {
+        font-size: 15px;
+        margin-bottom: 2px;
+        color: var(--accent);
+      }
+
+      .hero-stat p {
+        font-size: 11px;
+        opacity: 0.8;
+      }
+
+      .hero-floating-tag {
+        position: absolute;
+        top: -14px;
+        right: -14px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #4cffc3;
+        color: #020617;
+        font-size: 11px;
+        font-weight: 600;
+        box-shadow: 0 0 22px rgba(76, 255, 195, 0.8);
+      }
+
+      /* Trusted strip */
+      .trusted-strip {
+        margin-top: 30px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.8;
+      }
+
+      .trusted-logos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 8px;
+        font-size: 13px;
+        opacity: 0.9;
+      }
+
+      .trusted-pill {
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0, 0, 0, 0.25);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 70px 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-kicker {
+        text-transform: uppercase;
+        font-size: 12px;
+        letter-spacing: 2px;
+        opacity: 0.8;
+        margin-bottom: 8px;
+      }
+
+      .section-header h2 {
+        font-size: 34px;
+        margin-bottom: 8px;
+      }
+
+      .section-header p {
+        font-size: 15px;
+        opacity: 0.85;
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 26px;
+      }
+
+      .feature-card {
+        background: var(--bg-glass);
+        padding: 26px 22px;
+        border-radius: 20px;
+        text-align: left;
+        transition: all 0.35s ease;
+        border: 1px solid var(--border-glass);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::after {
+        content: "";
+        position: absolute;
+        width: 120%;
+        height: 120%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.16),
+          transparent 60%
+        );
+        top: -20%;
+        left: -30%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .feature-card:hover::after {
+        opacity: 1;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .feature-icon {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .feature-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        opacity: 0.7;
+        margin-bottom: 6px;
+      }
+
+      .feature-card h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+
+      .feature-card p {
+        font-size: 14px;
+        line-height: 1.6;
+        opacity: 0.9;
+      }
+
+      /* Stats Section */
+      .stats {
+        padding: 60px 0;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 32px;
+        text-align: center;
+      }
+
+      .stat-item {
+        padding: 26px 20px;
+        border-radius: 22px;
+        background: var(--bg-glass);
+        border: 1px solid var(--border-glass);
+        backdrop-filter: blur(12px);
+      }
+
+      .stat-item h3 {
+        font-size: 40px;
+        margin-bottom: 6px;
+        color: var(--accent);
+      }
+
+      .stat-item p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        padding: 60px 0;
+      }
+
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .testimonial-card {
+        background: rgba(0, 0, 0, 0.45);
+        border-radius: 20px;
+        padding: 22px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .testimonial-card::before {
+        content: "“";
+        position: absolute;
+        font-size: 76px;
+        opacity: 0.06;
+        top: -14px;
+        right: 14px;
+      }
+
+      .testimonial-text {
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 14px;
+        opacity: 0.9;
+      }
+
+      .testimonial-author {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 13px;
+      }
+
+      .testimonial-author strong {
+        font-size: 14px;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: 80px 0;
+      }
+
+      .cta-box {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 40px 24px;
+        border-radius: 26px;
+        background: radial-gradient(
+            circle at top left,
+            rgba(255, 255, 255, 0.25),
+            transparent 60%
+          ),
+          rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .cta-section h2 {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .cta-section p {
+        font-size: 16px;
+        margin-bottom: 24px;
+        opacity: 0.9;
+      }
+
+      .cta-note {
+        font-size: 12px;
+        opacity: 0.8;
+        margin-top: 10px;
+      }
+
+      /* Pricing Section */
+      .pricing {
+        padding: 70px 0;
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 26px;
+      }
+
+      .pricing-card {
+        background: var(--bg-glass);
+        border-radius: 22px;
+        padding: 26px 22px;
+        border: 1px solid var(--border-glass);
+        position: relative;
+      }
+
+      .pricing-card.highlight {
+        box-shadow: var(--shadow-soft);
+        transform: translateY(-4px);
+        border-color: var(--accent);
+      }
+
+      .pricing-plan {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 6px;
+      }
+
+      .pricing-price {
+        font-size: 30px;
+        margin-bottom: 6px;
+      }
+
+      .pricing-price span {
+        font-size: 13px;
+        opacity: 0.8;
+      }
+
+      .pricing-desc {
+        font-size: 13px;
+        opacity: 0.85;
+        margin-bottom: 14px;
+      }
+
+      .pricing-list {
+        list-style: none;
+        font-size: 13px;
+        opacity: 0.9;
+        margin-bottom: 18px;
+      }
+
+      .pricing-list li {
+        margin-bottom: 6px;
+      }
+
+      .pricing-list li::before {
+        content: "✔";
+        margin-right: 6px;
+        font-size: 11px;
+      }
+
+      .pricing-tag {
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(255, 216, 155, 0.95);
+        color: #1e1b4b;
+        font-weight: 600;
+      }
+
+      .pricing-btn {
+        display: inline-block;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.9);
+        color: #111827;
+        transition: all 0.3s ease;
+      }
+
+      .pricing-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Contact Section (simple form) */
+      .contact {
+        padding: 60px 0;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 36px;
+      }
+
+      .contact-info p {
+        font-size: 14px;
+        opacity: 0.85;
+        margin-bottom: 10px;
+      }
+
+      .contact-details {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .contact-details p {
+        margin-bottom: 4px;
+      }
+
+      .contact-form {
+        background: rgba(0, 0, 0, 0.45);
+        border-radius: 22px;
+        padding: 24px 20px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .form-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+
+      .form-group {
+        flex: 1;
+        min-width: 140px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 4px;
+        opacity: 0.85;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 9px 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: rgba(15, 23, 42, 0.8);
+        color: #ffffff;
+        font-size: 13px;
+        outline: none;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px rgba(255, 216, 155, 0.8);
+      }
+
+      .form-submit {
+        margin-top: 6px;
+      }
+
+      .form-submit button {
+        padding: 10px 24px;
+        border-radius: 999px;
+        border: none;
+        font-size: 13px;
+        font-weight: 600;
+        background: linear-gradient(135deg, #ffffff, var(--accent));
+        color: #1f2937;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .form-submit button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+      }
+
+      /* Footer */
+      footer {
+        background: rgba(0, 0, 0, 0.45);
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+        margin-top: 40px;
+      }
+
+      .footer-main {
+        padding: 34px 0 24px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        gap: 28px;
+      }
+
+      .footer-column h4 {
+        font-size: 15px;
+        margin-bottom: 14px;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column li {
+        margin-bottom: 8px;
+      }
+
+      .footer-column a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-size: 13px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column a:hover {
+        color: #ffffff;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding: 14px 0 18px;
+        font-size: 11px;
+        opacity: 0.75;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 920px) {
+        .hero-inner {
+          grid-template-columns: minmax(0, 1fr);
+          text-align: left;
+        }
+
+        .hero-right {
+          order: -1;
+          margin-bottom: 20px;
+        }
+
+        .hero p {
+          max-width: none;
+        }
+
+        .contact-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-inner {
+          padding-inline: 14px;
+        }
+
+        nav {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 100%;
+          background: rgba(7, 7, 27, 0.96);
+          max-height: 0;
+          overflow: hidden;
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.3s ease;
+        }
+
+        nav ul {
+          flex-direction: column;
+          padding: 10px 22px 14px;
+          gap: 10px;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .hero {
+          padding: 100px 0 60px;
+        }
+
+        .trusted-logos {
+          gap: 10px;
+        }
+
+        .cta-box {
+          padding-inline: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Decorative background orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <!-- Header -->
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-badge"></div>
+          NexGen
+        </div>
+
+        <!-- Mobile menu toggle (CSS only) -->
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="hamburger">
+          <span class="line-1"></span>
+          <span class="line-2"></span>
+          <span class="line-3"></span>
+        </label>
+
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Stories</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <div class="hero-tagline">
+            <span class="badge-dot"></span>
+            Future-ready innovation platform
+          </div>
+          <h1>Welcome to the Future of Intelligent Experiences</h1>
+          <p>
+            Transform ideas into reality with NexGen — a next-generation
+            platform built for speed, security, and breathtaking digital
+            experiences.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#pricing" class="cta-button">Start Free Trial</a>
+            <a href="#features" class="ghost-button">Explore Features</a>
+          </div>
+          <div class="hero-meta">
+            <strong>10K+</strong> teams already building with NexGen · No credit
+            card required
+          </div>
+
+          <div class="trusted-strip">
+            Trusted by product teams at:
+            <div class="trusted-logos">
+              <span class="trusted-pill">NovaLabs</span>
+              <span class="trusted-pill">QuantumOne</span>
+              <span class="trusted-pill">Skyline AI</span>
+              <span class="trusted-pill">Orbital Cloud</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-floating-tag">Live uptime: 99.99%</div>
+
+          <!--  Hero image from a free stock website -->
+          <div class="hero-illustration">
+            <img
+              src="https://cdn.crn.in/wp-content/uploads/2022/03/06203356/CRN_Services_Portfolio_Technology_696.jpg"
+              alt="Team collaborating with futuristic technology"
+            />
+          </div>
+
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="hero-card-badge">Live Preview · NexGen Console</div>
+              <div class="hero-card-title">Your growth, at a glance</div>
+              <p style="font-size: 13px; opacity: 0.85; margin-bottom: 10px">
+                Track performance, uptime, and user engagement in real-time.
+              </p>
+              <div class="hero-stats">
+                <div class="hero-stat">
+                  <h4>+245%</h4>
+                  <p>Faster launch cycles</p>
+                </div>
+                <div class="hero-stat">
+                  <h4>50M+</h4>
+                  <p>Secure transactions</p>
+                </div>
+                <div class="hero-stat">
+                  <h4>24/7</h4>
+                  <p>Global monitoring</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Why NexGen</div>
+          <h2>The engine behind high-performing products</h2>
+          <p>
+            From lightning-fast performance to enterprise-grade security, NexGen
+            gives you everything you need to ship with confidence.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-label">Performance</div>
+            <h3>Lightning Fast</h3>
+            <p>
+              Experience unmatched speed powered by globally distributed
+              infrastructure designed for scale and reliability.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-label">Security</div>
+            <h3>Secure by Design</h3>
+            <p>
+              End-to-end encryption, continuous audits, and intelligent threat
+              detection keep your data safe around the clock.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <div class="feature-label">Experience</div>
+            <h3>Beautiful Interfaces</h3>
+            <p>
+              Delight your users with clean, modern interfaces that look sharp
+              on every screen and device.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <div class="feature-label">Responsive</div>
+            <h3>Optimized Everywhere</h3>
+            <p>
+              From phone to desktop, NexGen automatically adapts to deliver
+              pixel-perfect experiences.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-label">Growth</div>
+            <h3>Effortless Scaling</h3>
+            <p>
+              Go from startup to global brand without changing your stack.
+              NexGen scales seamlessly with your growth.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <div class="feature-label">Innovation</div>
+            <h3>Innovation Ready</h3>
+            <p>
+              Preview experimental features, test new ideas quickly, and stay
+              ahead of the competition.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat-item">
+          <h3>10K+</h3>
+          <p>Teams building on NexGen</p>
+        </div>
+        <div class="stat-item">
+          <h3>50M+</h3>
+          <p>Transactions processed every month</p>
+        </div>
+        <div class="stat-item">
+          <h3>99.9%</h3>
+          <p>Guaranteed uptime backed by SLAs</p>
+        </div>
+        <div class="stat-item">
+          <h3>24/7</h3>
+          <p>Human support whenever you need it</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Simple plans</div>
+          <h2>Choose the right plan for your team</h2>
+          <p>
+            No setup fees, no hidden charges. Start free and move up only when
+            you’re ready.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-plan">Starter</div>
+            <div class="pricing-price">Free <span>/ forever</span></div>
+            <p class="pricing-desc">
+              Perfect for individuals exploring NexGen.
+            </p>
+            <ul class="pricing-list">
+              <li>Up to 3 active projects</li>
+              <li>Basic analytics</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#contact" class="pricing-btn">Get started</a>
+          </div>
+
+          <div class="pricing-card highlight">
+            <div class="pricing-tag">Most popular</div>
+            <div class="pricing-plan">Growth</div>
+            <div class="pricing-price">$39 <span>/ month</span></div>
+            <p class="pricing-desc">
+              For fast-moving teams shipping real products.
+            </p>
+            <ul class="pricing-list">
+              <li>Unlimited projects</li>
+              <li>Advanced performance insights</li>
+              <li>Priority email support</li>
+              <li>Team collaboration tools</li>
+            </ul>
+            <a href="#contact" class="pricing-btn">Start free trial</a>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-plan">Enterprise</div>
+            <div class="pricing-price">Let’s talk</div>
+            <p class="pricing-desc">
+              Custom solutions for large-scale deployments.
+            </p>
+            <ul class="pricing-list">
+              <li>Dedicated infrastructure</li>
+              <li>Custom security controls</li>
+              <li>Dedicated success manager</li>
+              <li>Onboarding & training</li>
+            </ul>
+            <a href="#contact" class="pricing-btn">Contact sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-kicker">Customer stories</div>
+          <h2>Loved by builders around the world</h2>
+          <p>
+            NexGen helps teams move from idea to launch in record time — while
+            keeping quality and reliability at the core.
+          </p>
+        </div>
+
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              “With NexGen, we cut our launch time by more than half. The
+              performance and reliability are unmatched.”
+            </p>
+            <div class="testimonial-author">
+              <strong>Aarav Mehta</strong>
+              <span>Product Lead · Skyline AI</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              “Security and speed rarely go together. NexGen manages to deliver
+              both beautifully, at global scale.”
+            </p>
+            <div class="testimonial-author">
+              <strong>Sarah Collins</strong>
+              <span>CTO · NovaLabs</span>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              “Our team was able to ship a polished experience in weeks instead
+              of months. NexGen is our unfair advantage.”
+            </p>
+            <div class="testimonial-author">
+              <strong>Rahul Verma</strong>
+              <span>Founder · QuantumOne</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="about">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Ready to see NexGen in action?</h2>
+          <p>
+            Join thousands of teams already building the future. Launch your
+            next idea with confidence, clarity, and world-class performance.
+          </p>
+          <a href="#contact" class="cta-button">Book a demo</a>
+          <div class="cta-note">
+            It only takes a minute — we’ll respond within one business day.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <div class="section-kicker">Contact</div>
+          <h2 style="font-size: 26px; margin-bottom: 10px">
+            Let’s build something remarkable
+          </h2>
+          <p>
+            Tell us a bit about your project, and our team will get back to you
+            with next steps, timelines, and the best plan for your needs.
+          </p>
+          <div class="contact-details">
+            <p><strong>Email:</strong> hello@nexgen.io</p>
+            <p><strong>Support:</strong> support@nexgen.io</p>
+            <p><strong>Office:</strong> Remote-first · Global</p>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input id="name" type="text" placeholder="Enter your name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Work Email</label>
+                <input id="email" type="email" placeholder="you@example.com" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input
+                  id="company"
+                  type="text"
+                  placeholder="Company / Team name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="size">Team Size</label>
+                <input id="size" type="text" placeholder="e.g. 5–10" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">How can we help?</label>
+              <textarea
+                id="message"
+                placeholder="Share a short description of your project..."
+              ></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit">Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-main">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="#testimonials">Customer stories</a></li>
+              <li><a href="#home">Platform overview</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#about">About NexGen</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Partners</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">Developer hub</a></li>
+              <li><a href="#">Community</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy policy</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Cookie policy</a></li>
+              <li><a href="#">Licenses</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2024 NexGen. All rights reserved. Crafted with passion for the
+        future of innovation.
+      </div>
+    </footer>
+  </body>
+</html>
